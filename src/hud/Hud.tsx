@@ -66,7 +66,7 @@ function Telemetry() {
   )
 }
 
-/** Overlay chrome: mission badge, flight status, telemetry and launch control. */
+/** Overlay chrome: flight status, telemetry and launch control. */
 export function Hud() {
   const phase = useLaunchStore((state) => state.phase)
   const launch = useLaunchStore((state) => state.launch)
@@ -76,12 +76,6 @@ export function Hud() {
 
   return (
     <div className="hud">
-      <header className="hud__badge">
-        <span className="hud__badge-dot" />
-        <span className="hud__badge-name">OPUS V</span>
-        <span className="hud__badge-sub">Heavy Lift Vehicle</span>
-      </header>
-
       <div className={`hud__phase hud__phase--${phase}`}>
         <span className="hud__phase-label">Flight status</span>
         <strong className="hud__phase-value">{PHASE_LABELS[phase]}</strong>
