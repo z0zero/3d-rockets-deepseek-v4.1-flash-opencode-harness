@@ -1,3 +1,4 @@
+/* oxlint-disable react/immutability -- the camera is animated imperatively every frame */
 import { useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -97,19 +98,7 @@ export function CameraRig() {
     // Gentle roll keeps the ascent from feeling mechanical.
     camera.rotateZ(Math.sin(t * 0.21) * 0.016 * blend)
 
-    if (import.meta.env.DEV) {
-      const globals = window as unknown as Record<string, unknown>
-      const samples = (globals.__rigSamples ??= [] as unknown[]) as unknown[]
-      samples.push({
-        wall: Number(performance.now().toFixed(0)),
-        t: Number(t.toFixed(3)),
-        dt: Number(dt.toFixed(4)),
-        D: Math.round(midY),
-        L: Math.round(desiredLook.current.y),
-      })
-      if (samples.length > 12) samples.shift()
-      globals.__rig = samples
-    }
+
 
     // Keep the vehicle framed on narrow windows and add a little punch at speed.
     const aspect = size.width / Math.max(1, size.height)

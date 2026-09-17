@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { SmokeSystem, type SmokeSpawn } from './smoke'
 import { sharedGlowTexture } from './textures'
 import { PAD } from './constants'
-import { getLaunchTime } from '../launch/launchStore'
+import { getLaunchTime, useLaunchStore } from '../launch/launchStore'
 import {
   IGNITION_DURATION,
   MAX_STEP,
@@ -36,9 +36,15 @@ export function Exhaust() {
   const glowTexture = useMemo(() => sharedGlowTexture(), [])
   const emit = useRef({ pad: 0, trail: 0, vent: 0, core: 0 })
 
+  const phase = useLaunchStore((state) => state.phase)
+
   useEffect(() => {
     return () => smoke.reset()
   }, [smoke])
+
+  useEffect(() => {
+    if (phase === 'idle') smoke.reset()
+  }, [phase, smoke])
 
   useFrame((_, rawDelta) => {
     const dt = Math.min(rawDelta, MAX_STEP)
@@ -63,13 +69,25 @@ export function Exhaust() {
     }
     const intensity = throttle * flicker
     if (coreRef.current) {
-      coreRef.current.scale.set(0.9 + intensity * 0.5, 16 * intensity, 0.9 + intensity * 0.5)
+      coreRef.current.scale.set(
+        1.2 + intensity * 0.7,
+        17 * intensity,
+        1.2 + intensity * 0.7,
+      )
     }
     if (midRef.current) {
-      midRef.current.scale.set(1.5 + intensity * 0.9, 26 * intensity, 1.5 + intensity * 0.9)
+      midRef.current.scale.set(
+        2 + intensity * 1.1,
+        27 * intensity,
+        2 + intensity * 1.1,
+      )
     }
     if (outerRef.current) {
-      outerRef.current.scale.set(2.4 + intensity * 1.6, 40 * intensity, 2.4 + intensity * 1.6)
+      outerRef.current.scale.set(
+        3 + intensity * 2,
+        41 * intensity,
+        3 + intensity * 2,
+      )
     }
     if (glowRef.current) {
       const glow = 7 + intensity * 15

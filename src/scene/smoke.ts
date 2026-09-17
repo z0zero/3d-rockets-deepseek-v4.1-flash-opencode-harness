@@ -152,12 +152,6 @@ export class SmokeSystem {
     this.object.renderOrder = 20
   }
 
-  get liveCount() {
-    let count = 0
-    for (const particle of this.particles) if (particle.live) count++
-    return count
-  }
-
   spawn(spec: SmokeSpawn) {
     const particle = this.particles[this.cursor]
     this.cursor = (this.cursor + 1) % this.capacity

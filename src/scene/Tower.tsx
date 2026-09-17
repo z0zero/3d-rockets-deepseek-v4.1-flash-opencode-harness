@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import * as THREE from 'three'
 import { orientBeam } from '../lib/geometry'
-import { MOUNT_HEIGHT, ROCKET_HEIGHT } from '../launch/timeline'
+import { MOUNT_HEIGHT } from '../launch/timeline'
 import { InstancedField } from './InstancedField'
 import { PAD } from './constants'
 
@@ -346,6 +346,3 @@ export function PadSupport() {
     </group>
   )
 }
-
-export const TOWER_HEIGHT = TOWER.height
-export const VEHICLE_HEIGHT = ROCKET_HEIGHT

@@ -4,7 +4,7 @@ import { SUN_DIRECTION } from './constants'
 export function Lighting() {
   return (
     <>
-      <hemisphereLight args={['#bcd8ff', '#6f7f52', 1.15]} />
+      <hemisphereLight args={['#bcd8ff', '#9aa38c', 1.1]} />
       <ambientLight intensity={0.25} />
       <directionalLight
         position={[

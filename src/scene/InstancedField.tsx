@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from 'react'
 import * as THREE from 'three'
 
 interface InstancedFieldProps {
@@ -23,7 +23,10 @@ export function InstancedField({
 }: InstancedFieldProps) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const buildRef = useRef(build)
-  buildRef.current = build
+
+  useEffect(() => {
+    buildRef.current = build
+  })
 
   useLayoutEffect(() => {
     const mesh = meshRef.current

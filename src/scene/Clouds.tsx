@@ -59,7 +59,7 @@ function buildClouds(): CloudSpec[] {
 
 /** Volumetric-looking cloud field built from billboarded puffs. */
 export function Clouds() {
-  const clouds = useMemo(buildClouds, [])
+  const clouds = useMemo(() => buildClouds(), [])
   const texture = useMemo(() => createPuffTexture(192, 21, 22), [])
 
   return (
