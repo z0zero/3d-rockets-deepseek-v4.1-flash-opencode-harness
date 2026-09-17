@@ -5,7 +5,17 @@ and React Three Fiber. Everything in the scene — the launch vehicle, the servi
 tower, the launch mount, the terrain and the exhaust smoke — is generated
 procedurally at runtime, so the app ships no external 3D or texture assets.
 
-![Rocket clearing the service tower during liftoff](screenshots/liftoff.jpg)
+## Screenshots
+
+| Pre-launch                                        | Ignition                                      |
+| ------------------------------------------------- | --------------------------------------------- |
+| ![Pre-launch](docs/screenshots/01-launch-pad.jpg) | ![Ignition](docs/screenshots/02-ignition.jpg) |
+
+| Liftoff                                     | Ascent                                    |
+| ------------------------------------------- | ----------------------------------------- |
+| ![Liftoff](docs/screenshots/03-liftoff.jpg) | ![Ascent](docs/screenshots/04-ascent.jpg) |
+
+![High ascent](docs/screenshots/05-high-ascent.jpg)
 
 ## What it does
 
@@ -25,10 +35,6 @@ Press **Launch** and the vehicle runs a complete launch sequence:
    again.
 
 Live telemetry (mission elapsed time, altitude, velocity) is shown in the HUD.
-
-| On the pad | Ascent | Main engine cutoff |
-| --- | --- | --- |
-| ![Rocket on the launch pad](screenshots/pad.jpg) | ![Rocket ascending through the cloud layer](screenshots/ascent.jpg) | ![Vehicle coasting after cutoff](screenshots/meco.jpg) |
 
 ## Running locally
 
