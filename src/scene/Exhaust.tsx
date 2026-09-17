@@ -9,11 +9,12 @@ import {
   IGNITION_DURATION,
   MAX_STEP,
   MECO_ALTITUDE,
+  MOUNT_HEIGHT,
   altitudeAt,
   throttleAt,
 } from '../launch/timeline'
 
-const ROCKET_BASE_Y = PAD.padHeight + 7
+const ROCKET_BASE_Y = PAD.padHeight + MOUNT_HEIGHT
 const PAD_Y = PAD.padHeight
 
 const COOL_SMOKE: [number, number, number] = [0.97, 0.96, 0.94]
@@ -30,6 +31,7 @@ export function Exhaust() {
   const midRef = useRef<THREE.Mesh>(null)
   const outerRef = useRef<THREE.Mesh>(null)
   const glowRef = useRef<THREE.Sprite>(null)
+  const coreGlowRef = useRef<THREE.Sprite>(null)
   const engineLight = useRef<THREE.PointLight>(null)
   const padLight = useRef<THREE.PointLight>(null)
 
@@ -95,6 +97,14 @@ export function Exhaust() {
       glowRef.current.position.y = engineY - 1.4
       ;(glowRef.current.material as THREE.SpriteMaterial).opacity =
         0.28 + intensity * 0.32
+    }
+
+    if (coreGlowRef.current) {
+      const coreGlow = 3 + intensity * 8
+      coreGlowRef.current.scale.set(coreGlow, coreGlow, 1)
+      coreGlowRef.current.position.y = engineY - 0.6
+      ;(coreGlowRef.current.material as THREE.SpriteMaterial).opacity =
+        intensity * 0.7
     }
 
     // --- Exhaust lighting -------------------------------------------------
@@ -183,11 +193,11 @@ export function Exhaust() {
       while (emitter.trail >= 1) {
         emitter.trail -= 1
         const angle = Math.random() * Math.PI * 2
-        const radius = 2 + Math.random() * 6
+        const radius = 2 + Math.random() * 10
         spawn({
           position: [
             Math.cos(angle) * radius,
-            engineY - 2 - Math.random() * 10,
+            engineY - 2 - Math.random() * 12,
             Math.sin(angle) * radius,
           ],
           velocity: [
@@ -195,10 +205,10 @@ export function Exhaust() {
             -2 + Math.random() * 2,
             Math.sin(angle) * (2 + Math.random() * 4),
           ],
-          spread: 1.5,
-          size: [6, 36],
+          spread: 1.8,
+          size: [7, 42],
           life: [3, 5.5],
-          alpha: 0.3,
+          alpha: 0.28,
           color: Math.random() < 0.5 ? WARM_SMOKE : COOL_SMOKE,
           drag: 1.5,
           buoyancy: 1.8,
@@ -284,6 +294,19 @@ export function Exhaust() {
           map={glowTexture}
           transparent
           opacity={0.5}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+          toneMapped={false}
+        />
+      </sprite>
+
+      {/* Tight warm core so the plume reads hot right at the nozzle. */}
+      <sprite ref={coreGlowRef} position={[0, 0, 0]}>
+        <spriteMaterial
+          map={glowTexture}
+          color="#ffcf8a"
+          transparent
+          opacity={0.55}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
           toneMapped={false}
