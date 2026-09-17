@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { CameraRig } from './CameraRig'
+import { Exhaust } from './Exhaust'
 import { Rocket } from './Rocket'
 import { LaunchMount, PadSupport, Tower } from './Tower'
 import { World } from './World'
@@ -21,6 +22,7 @@ export function Scene() {
       <LaunchMount />
       <PadSupport />
       <Rocket />
+      <Exhaust />
     </Canvas>
   )
 }

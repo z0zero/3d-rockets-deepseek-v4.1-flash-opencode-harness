@@ -1,5 +1,11 @@
 export type Phase = 'idle' | 'ignition' | 'liftoff' | 'ascent' | 'complete'
 
+/**
+ * Largest simulation step allowed in one frame. Also used by the effect
+ * systems so visuals stay in sync when a frame runs long on slow devices.
+ */
+export const MAX_STEP = 0.25
+
 /** Seconds of engine spool-up before the rocket leaves the pad. */
 export const IGNITION_DURATION = 3.4
 /** Altitude (m) at which the rocket is considered clear of the pad. */

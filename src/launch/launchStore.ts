@@ -1,9 +1,5 @@
 import { create } from 'zustand'
-import {
-  altitudeAt,
-  phaseAt,
-  type Phase,
-} from './timeline'
+import { MAX_STEP, altitudeAt, phaseAt, type Phase } from './timeline'
 
 interface LaunchState {
   phase: Phase
@@ -37,7 +33,7 @@ export const useLaunchStore = create<LaunchState>((set, get) => ({
   tick: (dt) => {
     const phase = get().phase
     if (phase === 'idle' || phase === 'complete') return
-    sim.t += Math.min(dt, 0.1)
+    sim.t += Math.min(dt, MAX_STEP)
     const next = phaseAt(sim.t)
     if (next !== phase) set({ phase: next })
   },
