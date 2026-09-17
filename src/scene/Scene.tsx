@@ -1,9 +1,11 @@
 import { Canvas } from '@react-three/fiber'
 import { CameraRig } from './CameraRig'
+import { Rocket } from './Rocket'
+import { LaunchMount, PadSupport, Tower } from './Tower'
 import { World } from './World'
 import { Simulation } from '../launch/Simulation'
 
-/** Root canvas. The launch vehicle and facilities are added on top of the world. */
+/** Root canvas composing the world, the launch complex and the vehicle. */
 export function Scene() {
   return (
     <Canvas
@@ -15,11 +17,10 @@ export function Scene() {
       <Simulation />
       <CameraRig />
       <World />
-      {/* Placeholder mass simulator, replaced by the launch vehicle. */}
-      <mesh position={[0, 32, 0]} castShadow>
-        <cylinderGeometry args={[2, 2, 50, 24]} />
-        <meshStandardMaterial color="#e8ecf1" roughness={0.6} />
-      </mesh>
+      <Tower />
+      <LaunchMount />
+      <PadSupport />
+      <Rocket />
     </Canvas>
   )
 }

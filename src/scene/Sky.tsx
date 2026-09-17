@@ -22,9 +22,9 @@ const fragmentShader = /* glsl */ `
     float h = clamp(dir.y, -0.1, 1.0);
 
     // Vertical gradient with a compressed band near the horizon.
-    float t = smoothstep(-0.02, 0.62, h);
+    float t = smoothstep(-0.01, 0.30, h);
     vec3 color = mix(uHorizon, uZenith, t);
-    color = mix(color, uZenith, smoothstep(0.55, 1.0, h) * 0.35);
+    color = mix(color, uZenith, smoothstep(0.30, 0.9, h) * 0.4);
 
     // Broad sun bloom plus a tighter core.
     float sun = max(dot(dir, normalize(uSunDir)), 0.0);
@@ -47,8 +47,8 @@ export function Sky({ sunDirection }: SkyProps) {
 
   const uniforms = useMemo(
     () => ({
-      uZenith: { value: new THREE.Color('#1f6fd0') },
-      uHorizon: { value: new THREE.Color('#d6ecff') },
+      uZenith: { value: new THREE.Color('#1a67d6') },
+      uHorizon: { value: new THREE.Color('#d8ecfd') },
       uSunColor: { value: new THREE.Color('#fff3d6') },
       uSunDir: { value: new THREE.Vector3(...sunDirection) },
     }),

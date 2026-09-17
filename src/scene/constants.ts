@@ -7,8 +7,8 @@ export const FOG_COLOR = '#cfe4f8'
 
 /** Launch pad geometry, in meters. */
 export const PAD = {
-  apronRadius: 150,
-  poolRadius: 48,
+  apronRadius: 125,
+  poolRadius: 41,
   padRadius: 30,
   padHeight: 2.2,
   mountHeight: 7,
